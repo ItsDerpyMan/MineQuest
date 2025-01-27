@@ -1,10 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "mptYFv6Wu1gfl7o5FhpxP6FJ1WHrKBi8EtD1hV2tTdkkImMZC+DY6bdzUX6+QVwCep0yo62x/rrC+FL2HEZwHg==",
+  "dgSpecHash": "Z0vfKXEvYh0=",
   "success": true,
-  "projectFilePath": "/home/derpy/Dokumentumok/Programming/csharp/main/main.csproj",
-  "expectedPackageFiles": [
-    "/home/derpy/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.11/microsoft.aspnetcore.app.ref.8.0.11.nupkg.sha512"
-  ],
+  "projectFilePath": "D:\\baranyai.noel\\MineQuest\\main\\main.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }
