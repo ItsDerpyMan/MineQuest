@@ -1,0 +1,14 @@
+/home/derpy/Dokumentumok/Programming/csharp/main/bin/Debug/net8.0/main
+/home/derpy/Dokumentumok/Programming/csharp/main/bin/Debug/net8.0/main.deps.json
+/home/derpy/Dokumentumok/Programming/csharp/main/bin/Debug/net8.0/main.runtimeconfig.json
+/home/derpy/Dokumentumok/Programming/csharp/main/bin/Debug/net8.0/main.dll
+/home/derpy/Dokumentumok/Programming/csharp/main/bin/Debug/net8.0/main.pdb
+/home/derpy/Dokumentumok/Programming/csharp/main/obj/Debug/net8.0/main.GeneratedMSBuildEditorConfig.editorconfig
+/home/derpy/Dokumentumok/Programming/csharp/main/obj/Debug/net8.0/main.AssemblyInfoInputs.cache
+/home/derpy/Dokumentumok/Programming/csharp/main/obj/Debug/net8.0/main.AssemblyInfo.cs
+/home/derpy/Dokumentumok/Programming/csharp/main/obj/Debug/net8.0/main.csproj.CoreCompileInputs.cache
+/home/derpy/Dokumentumok/Programming/csharp/main/obj/Debug/net8.0/main.dll
+/home/derpy/Dokumentumok/Programming/csharp/main/obj/Debug/net8.0/refint/main.dll
+/home/derpy/Dokumentumok/Programming/csharp/main/obj/Debug/net8.0/main.pdb
+/home/derpy/Dokumentumok/Programming/csharp/main/obj/Debug/net8.0/main.genruntimeconfig.cache
+/home/derpy/Dokumentumok/Programming/csharp/main/obj/Debug/net8.0/ref/main.dll
