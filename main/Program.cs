@@ -7,7 +7,7 @@ namespace MineSweeper
 
     class MineSweeper
     {
-        public const int field_size = 30;
+        public const int field_size = 11;
         public static int number_of_mines = 10;
         public static int lives = 9;
         public static int round = 1;
