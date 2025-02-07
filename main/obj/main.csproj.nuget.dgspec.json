@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\baranyai.noel\\MineQuest\\main\\main.csproj": {}
+    "D:\\BaranyaiNoel\\MineQuest\\main\\main.csproj": {}
   },
   "projects": {
-    "D:\\baranyai.noel\\MineQuest\\main\\main.csproj": {
+    "D:\\BaranyaiNoel\\MineQuest\\main\\main.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\baranyai.noel\\MineQuest\\main\\main.csproj",
+        "projectUniqueName": "D:\\BaranyaiNoel\\MineQuest\\main\\main.csproj",
         "projectName": "main",
-        "projectPath": "D:\\baranyai.noel\\MineQuest\\main\\main.csproj",
+        "projectPath": "D:\\BaranyaiNoel\\MineQuest\\main\\main.csproj",
         "packagesPath": "C:\\Users\\baranyai.noel.akos\\.nuget\\packages\\",
-        "outputPath": "D:\\baranyai.noel\\MineQuest\\main\\obj\\",
+        "outputPath": "D:\\BaranyaiNoel\\MineQuest\\main\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

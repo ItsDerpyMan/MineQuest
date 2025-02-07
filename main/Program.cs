@@ -69,13 +69,13 @@ namespace MineSweeper
                                     break;
                             }
                             // Draw call
-                            DrawGrid(f.Cords, f.FoundMines, f.ConstMines);
+                            DrawGrid(f.GetCords, f.FoundMines, f.ConstMines);
                         }
                     }
                     // End of the round
                     number_of_mines = f.Mines.Count;
                     if (number_of_mines == 0) break;
-                    DrawDinstance(f.Cords, f.Mines);
+                    DrawDinstance(f.GetCords, f.Mines);
                     round++;
                 }
                 Console.SetCursorPosition(0, 19);
@@ -96,7 +96,7 @@ namespace MineSweeper
 
             }
         }
-        static void DrawGrid((int, int) player, HashSet<(int, int)> found_mines, HashSet<(int, int)> mines)
+        static void DrawGrid(Field.Cords player, HashSet<Field.Cords> found_mines, HashSet<Field.Cords> mines)
         {
             Console.SetCursorPosition(0, 0);
             var grid = new StringBuilder();
@@ -123,13 +123,13 @@ namespace MineSweeper
                 grid.Append(y.ToString().PadLeft(3));
                 for (int x = start; x <= end; x++)
                 {
-                    if (x == player.Item1 && y == player.Item2)
+                    if (x == player.x && y == player.y)
                         grid.Append("@".PadLeft(columnWidth));
                     else if (x == 0 && y == 0)
                         grid.Append("O".PadLeft(columnWidth));
-                    else if (found_mines.Contains((x, y)))
+                    else if (found_mines.Contains(new Field.Cords(x, y)))
                     {
-                        if (mines.Contains((x, y)))
+                        if (mines.Contains(new Field.Cords(x, y)))
                         {
                             grid.Append("\x1b[31m").Append("M".PadLeft(columnWidth)).Append("\x1b[0m");
                         }
@@ -143,11 +143,11 @@ namespace MineSweeper
             }
 
             grid.AppendLine("Press the <arrows> to move. Press the <Space> to mine mine.");
-            grid.AppendLine($"Pos: ({player.Item1}, {player.Item2})   ");
+            grid.AppendLine($"Pos: ({player.x}, {player.y})   ");
 
             Console.Write(grid.ToString() + "\r");
         }
-        static void DrawDinstance((int, int) player, HashSet<(int, int)> mines)
+        static void DrawDinstance(Field.Cords player, HashSet<Field.Cords> mines)
         {
 
             const int start = -1 * field_size / 2;
@@ -158,7 +158,7 @@ namespace MineSweeper
             Console.Write("Rows: ");
 
             int cord_y = start + 1;
-            var y_mines = mines.Where(m => m.Item2 == player.Item2).ToHashSet();
+            var y_mines = mines.Where(m => m.y == player.y).ToHashSet();
             if (y_mines.Count < lrows)
             {
                 for (int i = 0; i < lrows; i++)
@@ -183,7 +183,7 @@ namespace MineSweeper
             Console.Write("Columns: ");
 
             int cord_x = start + 1;
-            var x_mines = mines.Where(m => m.Item1 == player.Item1).ToHashSet();
+            var x_mines = mines.Where(m => m.x == player.x).ToHashSet();
             if (y_mines.Count < lcolumn)
             {
                 for (int i = 0; i < lcolumn; i++)
