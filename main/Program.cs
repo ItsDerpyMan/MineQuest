@@ -9,7 +9,7 @@ namespace MineSweeper
     {
         public const int field_size = 11;
         public static int number_of_mines = 10;
-        public static int lives = 9;
+        public static int lives = 100;
         public static int round = 1;
         private static int lrows;
         private static int lcolumn;
@@ -96,57 +96,97 @@ namespace MineSweeper
 
             }
         }
+        static int Abs(int x) => (x ^ (x >> 31)) - (x >> 31);
+
+        static string CordsToCharacter(Field.Cords cord, Field.Cords player, HashSet<Field.Cords> foundMines, HashSet<Field.Cords> mines)
+        {
+            return cord switch
+            {
+                _ when cord.x == player.x && cord.y == player.y => "\u001b[38;5;82m@\u001b[0m",
+                _ when cord.x == 0 && cord.y == 0 => "\u001b[38;5;62mO\u001b[0m",
+                _ when foundMines.Contains(cord) => mines.Contains(cord) ? "\u001b[31mM\u001b[0m" : "\u001b[38;5;62mX\u001b[0m",
+                _ => "\u001b[37m.\u001b[0m"
+            };
+        }
         static void DrawGrid(Field.Cords player, HashSet<Field.Cords> found_mines, HashSet<Field.Cords> mines)
         {
-            Console.SetCursorPosition(0, 0);
-            var grid = new StringBuilder();
-
             const int start = -1 * field_size / 2;
             const int end = field_size / 2;
+            int columnWidth = Math.Max(end.ToString().Length, (-start).ToString().Length) + 2;
+            int left_padding = 1 * columnWidth;
+            //    -5 -4 -3 -2 -1 0 1 2 3 4 5 
+            for (int i = start; i <= end; i++)
+            {
+                int position = (i + 6) * columnWidth;
+                if (i >= 0) position += 1;
+                Console.Write($"\u001b[4;{left_padding + position}H{i}");
+            }
+            for (int i = end ; i >= start; i--)
+            {
+                Console.Write($"\u001b[{10 - i};{1* left_padding}H{i}");
 
-            int columnWidth = Math.Max(end.ToString().Length, (-start).ToString().Length) + 1;
-
-            grid.AppendLine($"{round}. Round")
-            .AppendLine($"Guess a number between {field_size * -1 / 2} and {field_size / 2} on the X and Y cordinates.")
-            .AppendLine($"Lives: {lives}")
-            .AppendLine($"Mines: {number_of_mines} ");
-
-            grid.Append(' ', 3);
+            }
+            int y = end;
             for (int x = start; x <= end; x++)
             {
-                grid.Append(x.ToString().PadLeft(columnWidth));
+                int position = (x + 6) * columnWidth;
+                string character = CordsToCharacter(new Field.Cords(x, y), player, found_mines, mines);
+                Console.Write($"\u001b[{10 - y};{left_padding + position}H{character}");
+                
+                if (x == end && y != start) { y--; x = start; }
             }
-            grid.AppendLine();
-
-            for (int y = end; y >= start; y--)
-            {
-                grid.Append(y.ToString().PadLeft(3));
-                for (int x = start; x <= end; x++)
-                {
-                    if (x == player.x && y == player.y)
-                        grid.Append("@".PadLeft(columnWidth));
-                    else if (x == 0 && y == 0)
-                        grid.Append("O".PadLeft(columnWidth));
-                    else if (found_mines.Contains(new Field.Cords(x, y)))
-                    {
-                        if (mines.Contains(new Field.Cords(x, y)))
-                        {
-                            grid.Append("\x1b[31m").Append("M".PadLeft(columnWidth)).Append("\x1b[0m");
-                        }
-                        else
-                            grid.Append("\x1b[34m").Append("X".PadLeft(columnWidth)).Append("\x1b[0m");
-                    }
-                    else
-                        grid.Append(".".PadLeft(columnWidth));
-                }
-                grid.AppendLine();
-            }
-
-            grid.AppendLine("Press the <arrows> to move. Press the <Space> to mine mine.");
-            grid.AppendLine($"Pos: ({player.x}, {player.y})   ");
-
-            Console.Write(grid.ToString() + "\r");
         }
+        //static void DrawGrid(Field.Cords player, HashSet<Field.Cords> found_mines, HashSet<Field.Cords> mines)
+        //{
+        //    Console.SetCursorPosition(0, 0);
+        //    var grid = new StringBuilder();
+
+        //    const int start = -1 * field_size / 2;
+        //    const int end = field_size / 2;
+
+        //    int columnWidth = Math.Max(end.ToString().Length, (-start).ToString().Length) + 1;
+
+        //    grid.AppendLine($"{round}. Round")
+        //    .AppendLine($"Guess a number between {field_size * -1 / 2} and {field_size / 2} on the X and Y cordinates.")
+        //    .AppendLine($"Lives: {lives}")
+        //    .AppendLine($"Mines: {number_of_mines} ");
+        //    //    -5 -4 -3 -2 -1 0 1 2 3 4 5
+        //    grid.Append(' ', 3);
+        //    for (int x = start; x <= end; x++)
+        //    {
+        //        grid.Append(x.ToString().PadLeft(columnWidth));
+        //    }
+        //    grid.AppendLine();
+        //    // . . . . . . . 
+        //    for (int y = end; y >= start; y--)
+        //    {
+        //        grid.Append(y.ToString().PadLeft(3));
+        //        for (int x = start; x <= end; x++)
+        //        {
+        //            if (x == player.x && y == player.y)
+        //                grid.Append("@".PadLeft(columnWidth));
+        //            else if (x == 0 && y == 0)
+        //                grid.Append("O".PadLeft(columnWidth));
+        //            else if (found_mines.Contains(new Field.Cords(x, y)))
+        //            {
+        //                if (mines.Contains(new Field.Cords(x, y)))
+        //                {
+        //                    grid.Append("\x1b[31m").Append("M".PadLeft(columnWidth)).Append("\x1b[0m");
+        //                }
+        //                else
+        //                    grid.Append("\x1b[34m").Append("X".PadLeft(columnWidth)).Append("\x1b[0m");
+        //            }
+        //            else
+        //                grid.Append(".".PadLeft(columnWidth));
+        //        }
+        //        grid.AppendLine();
+        //    }
+
+        //    grid.AppendLine("Press the <arrows> to move. Press the <Space> to mine mine.");
+        //    grid.AppendLine($"Pos: ({player.x}, {player.y})   ");
+
+        //    Console.Write(grid.ToString() + "\r");
+        //}
         static void DrawDinstance(Field.Cords player, HashSet<Field.Cords> mines)
         {
 
